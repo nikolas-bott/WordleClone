@@ -3,6 +3,7 @@ const guessBtn = document.getElementById("guess-btn");
 const displayWord = document.getElementById("display-word");
 const textInput = document.getElementById("word-input");
 const container = document.getElementById("container");
+const bottomContainer = document.getElementById("bottom-container");
 
 const wordLength = 4;
 let currentWord;
@@ -23,30 +24,35 @@ guessBtn.addEventListener("click", async () => {
     return;
   }
 
+  const wordList = document.createElement("div");
+  wordList.classList.add("word-list");
   const validationArray = checkForCorrectLetters(guessedWord);
   const wordAsArr = guessedWord.split("");
   validationArray.forEach((number, index) =>
-    createOutput(wordAsArr[index], number)
+    createOutput(wordAsArr[index], number, wordList)
   );
 });
 
-function createOutput(letter, validationNumber) {
+function createOutput(letter, validationNumber, wordList) {
   console.log("ja...");
+
+  bottomContainer.appendChild(wordList);
+
   const outputDiv = document.createElement("div");
   const outputP = document.createElement("p");
 
-  container.appendChild(outputDiv);
+  wordList.appendChild(outputDiv);
   outputDiv.appendChild(outputP);
 
   switch (validationNumber) {
     case -1:
-      outputDiv.style.backgroundColor = "yellow";
+      outputDiv.style.backgroundColor = "#b59f3b";
       break;
     case 0:
-      outputDiv.style.backgroundColor = "beige";
+      outputDiv.style.backgroundColor = "#3a3a3c";
       break;
     case 1:
-      outputDiv.style.backgroundColor = "green";
+      outputDiv.style.backgroundColor = "#538d4e";
       break;
   }
 
